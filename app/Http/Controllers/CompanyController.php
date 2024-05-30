@@ -66,7 +66,6 @@ class CompanyController extends Controller
         return response()->json($result);
     }
 
-
     public function getEmployeeTree($companyId, $employeeId)
     {
         $company = Company::find($companyId);
@@ -92,7 +91,6 @@ class CompanyController extends Controller
             'manager_tree' => $managerTree
         ]);
     }
-
 
 }
 
