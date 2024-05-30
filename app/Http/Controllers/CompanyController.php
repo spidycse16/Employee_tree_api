@@ -73,7 +73,6 @@ class CompanyController extends Controller
         if (!$company) {
             return response()->json(['error' => 'Company not found'], 404);
         }
-
         $employee = Contract::where('company_id', $companyId)
                             ->where('employee_id', $employeeId)
                             ->with('employee')
@@ -91,7 +90,7 @@ class CompanyController extends Controller
             'manager_tree' => $managerTree
         ]);
     }
-
+    
 }
 
 
