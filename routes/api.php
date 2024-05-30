@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('{id}/company', [CompanyController::class, 'getManagerTree']);
 Route::get('/allcompanies',[CompanyController::class,'getAllCompanies']);
+Route::get('/company/{companyId}/employee/{employeeId}', [CompanyController::class, 'getEmployeeTree']);

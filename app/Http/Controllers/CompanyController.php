@@ -59,11 +59,38 @@ class CompanyController extends Controller
             $result[] = [
                 'company_name' => $company->name,
                 'manager_tree' => $managerTree,
-                
+
             ];
         }
         return response()->json($result);
     }
+
+    public function getEmployeeTree($companyId, $employeeId)
+    {
+        $company = Company::find($companyId);
+
+        if (!$company) {
+            return response()->json(['error' => 'Company not found'], 404);
+        }
+
+        $employee = Contract::where('company_id', $companyId)
+                            ->where('employee_id', $employeeId)
+                            ->with('employee')
+                            ->first();
+
+        if (!$employee) {
+            return response()->json(['error' => 'Employee not found in the specified company'], 404);
+        }
+
+        $managerTree = $this->buildManagerTree($companyId, $employeeId);
+
+        return response()->json([
+            'company_name' => $company->name,
+            'employee_name' => $employee->employee->name,
+            'manager_tree' => $managerTree
+        ]);
+    }
+
 }
 
 
