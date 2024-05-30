@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('{id}/company', [CompanyController::class, 'getManagerTree']);
+Route::get('/allcompanies',[CompanyController::class,'getAllCompanies']);

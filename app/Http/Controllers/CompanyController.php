@@ -48,6 +48,23 @@ class CompanyController extends Controller
 
         return $tree;
     }
+
+    public function getAllCompanies()
+    {
+        $companies = Company::all();
+        $result = [];
+
+        foreach ($companies as $company) {
+            $managerTree = $this->buildManagerTree($company->id);
+            $result[] = [
+                'company_name' => $company->name,
+                'manager_tree' => $managerTree,
+                
+            ];
+        }
+        return response()->json($result);
+    }
 }
+
 
 
